@@ -27,7 +27,7 @@ services:
       APP_SERVICE_AUTHOR: "admin@local"
 
       # 🔑 IMPORTANTE (si no existe, el panel rompe cosas)
-      APP_KEY: "base64:CHANGE_THIS_AFTER_FIRST_INSTALL"
+      APP_KEY: "base64:B70lb79wF8w4M3ofXNnUC0A61phvftveugEDr3lV5ZY="
 
       CACHE_DRIVER: redis
       SESSION_DRIVER: redis
