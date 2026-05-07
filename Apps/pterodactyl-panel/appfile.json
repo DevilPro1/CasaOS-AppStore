@@ -1,0 +1,16 @@
+{
+  "id": "pterodactyl-panel",
+  "version": "1.0.0",
+  "image": "ghcr.io/pterodactyl/panel:v1.12.2",
+  "min_memory": 512,
+  "port_map": "1180",
+  "description": "Pterodactyl Panel optimized for CasaOS",
+  "developer": "DevilPro1",
+  "website": "https://pterodactyl.io",
+  "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/pterodactyl.png",
+  "title": {
+    "en_us": "Pterodactyl Panel"
+  },
+  "category": "Games"
+}
+
