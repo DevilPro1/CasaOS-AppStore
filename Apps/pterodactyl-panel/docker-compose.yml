@@ -1,6 +1,7 @@
 name: big-bear-pterodactyl-panel
 
 services:
+
   app:
     container_name: pterodactyl-panel
     image: ghcr.io/pterodactyl/panel:v1.12.2
@@ -12,6 +13,7 @@ services:
 
     ports:
       - "1180:80"
+      - "11443:443"
 
     volumes:
       - "/DATA/AppData/pterodactyl/var:/app/var"
@@ -19,35 +21,28 @@ services:
 
     environment:
       APP_URL: "http://192.168.0.205:1180"
-
       APP_ENV: "production"
       APP_ENVIRONMENT_ONLY: "false"
-
       APP_TIMEZONE: "Europe/Madrid"
-
       APP_SERVICE_AUTHOR: "admin@local"
 
       CACHE_DRIVER: "redis"
       SESSION_DRIVER: "redis"
       QUEUE_DRIVER: "redis"
-
       REDIS_HOST: "cache"
 
       DB_HOST: "database"
       DB_PORT: "3306"
       DB_DATABASE: "nikovps"
       DB_USERNAME: "niko_local"
-      DB_PASSWORD: "nikOo#6A57@2026"
+      DB_PASSWORD: "admIin#6676@2026"
       DB_CONNECTION: "mariadb"
 
-      MAIL_FROM: "admin@local"
       MAIL_DRIVER: "log"
+      MAIL_FROM: "admin@local"
 
-    healthcheck:
-      test: ["CMD", "php", "-v"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+    networks:
+      - ptero-net
 
   database:
     container_name: pterodactyl-db
@@ -59,16 +54,43 @@ services:
     environment:
       MYSQL_DATABASE: "nikovps"
       MYSQL_USER: "niko_local"
-      MYSQL_PASSWORD: "nikOo#6A57@2026"
-      MYSQL_ROOT_PASSWORD: "nikOo#6A57@2026"
+      MYSQL_PASSWORD: "admIin#6676@2026"
+      MYSQL_ROOT_PASSWORD: "admIin#6676@2026"
 
     volumes:
       - "/DATA/AppData/pterodactyl/database:/var/lib/mysql"
 
+    networks:
+      - ptero-net
+
   cache:
     container_name: pterodactyl-redis
-    image: redis:alpine
+    image: redis:7-alpine
     restart: unless-stopped
+
+    networks:
+      - ptero-net
+
+  wings:
+    container_name: pterodactyl-wings
+    image: ghcr.io/pterodactyl/wings:latest
+    restart: unless-stopped
+
+    ports:
+      - "8080:8080"
+      - "2022:2022"
+
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/var/lib/pterodactyl:/var/lib/pterodactyl"
+      - "/etc/pterodactyl:/etc/pterodactyl"
+
+    networks:
+      - ptero-net
+
+networks:
+  ptero-net:
+    driver: bridge
 
 x-casaos:
   architectures:
@@ -77,10 +99,10 @@ x-casaos:
   main: app
 
   description:
-    en_us: Pterodactyl Panel optimized for CasaOS
+    en_us: Clean Pterodactyl Panel + Wings stack for CasaOS
 
   tagline:
-    en_us: Pterodactyl Panel
+    en_us: Pterodactyl Stack
 
   developer: pterodactyl
 
@@ -94,4 +116,3 @@ x-casaos:
   category: Games
 
   port_map: "1180"
-
