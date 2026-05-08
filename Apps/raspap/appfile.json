@@ -1,35 +1,20 @@
 {
   "id": "raspap",
-  "name": "RaspAP",
-  "version": "latest",
-  "title": "RaspAP",
-  "description": "Wireless Access Point / Hotspot manager",
+  "version": "1.0.0",
+  "image": "ghcr.io/raspap/raspap-docker:latest",
+
+  "min_memory": 512,
+
+  "port_map": "8081",
+
+  "description": "RaspAP Wireless Access Point / Hotspot manager",
+  "developer": "raspap",
+  "website": "https://raspap.com",
   "icon": "https://docs.raspap.com/img/RaspAP-logo.png",
 
-  "type": "app",
+  "title": {
+    "en_us": "RaspAP"
+  },
 
-  "services": [
-    {
-      "name": "raspap",
-      "image": "ghcr.io/raspap/raspap-docker:latest"
-    }
-  ],
-
-  "ports": [
-    {
-      "container": 80,
-      "host": 8081,
-      "protocol": "http"
-    }
-  ],
-
-  "env": [
-    {
-      "key": "TZ",
-      "value": "Europe/Madrid"
-    }
-  ],
-
-  "privileged": true,
-  "network_mode": "host"
+  "category": "Network"
 }
