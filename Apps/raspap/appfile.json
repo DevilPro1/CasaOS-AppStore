@@ -1,21 +1,31 @@
 {
-  "name": "raspap",
+  "id": "raspap",
+  "name": "RaspAP",
   "version": "latest",
   "title": "RaspAP",
   "description": "Wireless Access Point / Hotspot manager",
   "icon": "https://docs.raspap.com/img/RaspAP-logo.png",
 
+  "type": "app",
+
+  "services": [
+    {
+      "name": "raspap",
+      "image": "ghcr.io/raspap/raspap-docker:latest"
+    }
+  ],
+
   "ports": [
     {
-      "container": "80",
-      "host": "8081",
-      "type": "http"
+      "container": 80,
+      "host": 8081,
+      "protocol": "http"
     }
   ],
 
   "env": [
     {
-      "name": "TZ",
+      "key": "TZ",
       "value": "Europe/Madrid"
     }
   ],
