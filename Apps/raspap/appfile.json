@@ -1,0 +1,55 @@
+{
+  "id": "raspap",
+  "version": "latest",
+  "image": "ghcr.io/raspap/raspap-docker",
+  "tag": "latest",
+
+  "title": "RaspAP",
+  "description": "Wireless Access Point / Hotspot manager for Linux",
+  "icon": "https://docs.raspap.com/img/RaspAP-logo.png",
+
+  "webui": "http://192.168.0.205:8081",
+
+  "ports": [
+    {
+      "container": "8081",
+      "host": "8081",
+      "protocol": "tcp"
+    }
+  ],
+
+  "volumes": [
+    {
+      "container": "/etc/raspap",
+      "host": "/etc/raspap"
+    },
+    {
+      "container": "/lib/modules",
+      "host": "/lib/modules"
+    },
+    {
+      "container": "/var/run/dbus",
+      "host": "/var/run/dbus"
+    },
+    {
+      "container": "/sys/class/net",
+      "host": "/sys/class/net"
+    }
+  ],
+
+  "env": [
+    {
+      "name": "TZ",
+      "value": "Europe/Madrid"
+    },
+    {
+      "name": "WEB_PORT",
+      "value": "8081"
+    }
+  ],
+
+  "privileged": true,
+  "network_mode": "host",
+
+  "restart": "unless-stopped"
+}

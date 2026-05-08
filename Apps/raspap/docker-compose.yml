@@ -1,0 +1,49 @@
+name: raspap
+
+services:
+  raspap:
+    container_name: raspap
+
+    image: ghcr.io/raspap/raspap-docker:latest
+
+    restart: unless-stopped
+
+    privileged: true
+
+    network_mode: host
+
+    environment:
+      WEB_PORT: 8081
+      TZ: Europe/Madrid
+
+    volumes:
+      - /etc/raspap:/etc/raspap
+      - /lib/modules:/lib/modules
+      - /var/run/dbus:/var/run/dbus
+      - /sys/class/net:/sys/class/net
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+
+  main: raspap
+
+  description:
+    en_us: RaspAP WiFi hotspot manager
+
+  tagline:
+    en_us: Wireless Access Point
+
+  developer: raspap
+
+  author: DevilPro1
+
+  icon: https://docs.raspap.com/img/RaspAP-logo.png
+
+  title:
+    en_us: RaspAP
+
+  category: Network
+
+  port_map: "8081"
